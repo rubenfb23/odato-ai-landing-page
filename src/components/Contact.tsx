@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { MapPin, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
@@ -60,39 +60,13 @@ const Contact = () => {
               <Card className="border-0 shadow-lg">
                 <CardHeader className="text-center">
                   <div className="mx-auto w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-4">
-                    <Mail className="w-6 h-6 text-primary-600" />
-                  </div>
-                  <CardTitle className="text-lg">Email</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="text-gray-600">contacto@odato.com</p>
-                  <p className="text-gray-600">ventas@odato.com</p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg">
-                <CardHeader className="text-center">
-                  <div className="mx-auto w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-4">
-                    <Phone className="w-6 h-6 text-primary-600" />
-                  </div>
-                  <CardTitle className="text-lg">Teléfono</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="text-gray-600">+34 900 123 456</p>
-                  <p className="text-gray-600">+34 900 123 457</p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg">
-                <CardHeader className="text-center">
-                  <div className="mx-auto w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-4">
                     <MapPin className="w-6 h-6 text-primary-600" />
                   </div>
-                  <CardTitle className="text-lg">Oficina</CardTitle>
+                  <CardTitle className="text-lg">Ubicación</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
-                  <p className="text-gray-600">Paseo de la Castellana, 123</p>
-                  <p className="text-gray-600">28046 Madrid, España</p>
+                  <p className="text-gray-600">Ourense, España</p>
+                  <p className="text-gray-600">Galicia</p>
                 </CardContent>
               </Card>
             </div>
@@ -166,7 +140,7 @@ const Contact = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full"
-                        placeholder="+34 123 456 789"
+                        placeholder="Teléfono de contacto"
                       />
                     </div>
                   </div>

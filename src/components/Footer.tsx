@@ -1,5 +1,5 @@
 
-import { Brain, Mail, Phone, MapPin, Linkedin, Twitter } from 'lucide-react';
+import { Linkedin, Twitter } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,14 +9,14 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-2">
             <div className="flex items-center mb-6">
               <div className="text-2xl font-bold bg-gradient-to-r from-primary-400 to-primary-500 bg-clip-text text-transparent">
                 Odato
               </div>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Transformamos empresas con soluciones de Inteligencia Artificial innovadoras y personalizadas.
+              Transformamos empresas con soluciones de Inteligencia Artificial innovadoras y personalizadas. Con sede en Ourense, Galicia, llevamos la innovación tecnológica a toda España.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors duration-200">
@@ -49,37 +49,15 @@ const Footer = () => {
               <li><a href="#" className="text-gray-300 hover:text-primary-400 transition-colors duration-200">Casos de Éxito</a></li>
               <li><a href="#" className="text-gray-300 hover:text-primary-400 transition-colors duration-200">Blog</a></li>
               <li><a href="#" className="text-gray-300 hover:text-primary-400 transition-colors duration-200">Carreras</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-primary-400 transition-colors duration-200">Prensa</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-primary-400 transition-colors duration-200">Ourense</a></li>
             </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Contacto</h3>
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <Mail size={16} className="text-primary-400 mr-3" />
-                <span className="text-gray-300">contacto@odato.com</span>
-              </div>
-              <div className="flex items-center">
-                <Phone size={16} className="text-primary-400 mr-3" />
-                <span className="text-gray-300">+34 900 123 456</span>
-              </div>
-              <div className="flex items-start">
-                <MapPin size={16} className="text-primary-400 mr-3 mt-1" />
-                <span className="text-gray-300">
-                  Paseo de la Castellana, 123<br />
-                  28046 Madrid, España
-                </span>
-              </div>
-            </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © {currentYear} Odato. Todos los derechos reservados.
+              © {currentYear} Odato - Ourense, Galicia. Todos los derechos reservados.
             </div>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors duration-200">
