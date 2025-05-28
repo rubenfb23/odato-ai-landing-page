@@ -1,7 +1,16 @@
 
 import { Shield, Clock, TrendingUp, Headphones } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const Benefits = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const benefits = [
     {
       icon: TrendingUp,
@@ -34,39 +43,79 @@ const Benefits = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-r from-primary-50 to-blue-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+    <section className="py-32 bg-gradient-to-b from-slate-800 to-slate-700 relative overflow-hidden">
+      {/* Multi-layer parallax backgrounds */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div 
+          className="absolute inset-0"
+          style={{ transform: `translateY(${(scrollY - 2000) * 0.6}px) rotate(${(scrollY - 2000) * 0.02}deg)` }}
+        >
+          <div className="absolute top-1/4 left-1/6 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/6 w-96 h-96 bg-cyan-500/8 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div 
+          className="absolute inset-0"
+          style={{ transform: `translateY(${(scrollY - 1800) * 0.4}px)` }}
+        >
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-400/15 rounded-full blur-2xl"></div>
+        </div>
+
+        <div 
+          className="absolute inset-0"
+          style={{ transform: `translateY(${(scrollY - 2200) * 0.2}px)` }}
+        >
+          <div className="absolute top-0 right-1/3 w-48 h-48 bg-cyan-300/20 rounded-full blur-xl"></div>
+          <div className="absolute bottom-0 left-1/3 w-56 h-56 bg-purple-300/15 rounded-full blur-xl"></div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header with dramatic parallax */}
+        <div 
+          className="text-center mb-20"
+          style={{ transform: `translateY(${(scrollY - 2000) * 0.3}px) scale(${1 + (scrollY - 2000) * 0.00005})` }}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             ¿Por qué elegir
-            <span className="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent"> Odato?</span>
+            <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-blue-400 bg-clip-text text-transparent mt-2"> Odato?</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Más que un proveedor, somos tu socio estratégico en la transformación digital con IA
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            Más que un proveedor, somos tu socio estratégico en la transformación digital con IA desde Ourense
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Benefits grid with staggered parallax */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {benefits.map((benefit, index) => (
             <div 
               key={benefit.title}
               className="text-center group"
+              style={{ 
+                transform: `translateY(${(scrollY - 2200 - index * 100) * (0.15 + index * 0.03)}px) rotateX(${(scrollY - 2400) * 0.01}deg)`,
+                transformStyle: 'preserve-3d'
+              }}
             >
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                <div className="mx-auto w-16 h-16 bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <benefit.icon className="w-8 h-8 text-white" />
+              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl border border-cyan-500/20 rounded-3xl p-8 shadow-2xl hover:shadow-cyan-500/20 transition-all duration-700 transform hover:-translate-y-6 hover:scale-105 h-full">
+                <div 
+                  className="mx-auto w-20 h-20 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-cyan-500/30"
+                  style={{ transform: `translateZ(30px)` }}
+                >
+                  <benefit.icon className="w-10 h-10 text-white" />
                 </div>
                 
-                <div className="mb-4">
-                  <div className="text-3xl font-bold text-primary-600 mb-1">{benefit.stat}</div>
-                  <div className="text-sm text-gray-500">{benefit.statLabel}</div>
+                <div className="mb-6">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2">
+                    {benefit.stat}
+                  </div>
+                  <div className="text-sm text-slate-400">{benefit.statLabel}</div>
                 </div>
                 
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors duration-500">
                   {benefit.title}
                 </h3>
                 
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-slate-300 leading-relaxed group-hover:text-slate-200 transition-colors duration-500">
                   {benefit.description}
                 </p>
               </div>
@@ -74,21 +123,35 @@ const Benefits = () => {
           ))}
         </div>
 
-        <div className="mt-16 bg-white rounded-3xl p-8 md:p-12 shadow-xl">
-          <div className="text-center">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-              Comenzemos tu transformación digital
-            </h3>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Agenda una consulta gratuita con nuestros expertos en IA y descubre cómo podemos impulsar tu negocio.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
-                Agendar Consulta Gratuita
-              </button>
-              <button className="border border-primary-600 text-primary-600 hover:bg-primary-50 px-8 py-4 rounded-lg font-semibold transition-all duration-300">
-                Descargar Caso de Estudio
-              </button>
+        {/* CTA section with inverse parallax */}
+        <div 
+          style={{ transform: `translateY(${(scrollY - 2800) * -0.2}px)` }}
+        >
+          <div className="bg-gradient-to-r from-slate-800/40 to-slate-900/40 backdrop-blur-2xl border border-cyan-500/30 rounded-3xl p-12 md:p-16 shadow-2xl">
+            <div className="text-center">
+              <h3 
+                className="text-3xl md:text-4xl font-bold text-white mb-6"
+                style={{ transform: `translateY(${(scrollY - 3000) * 0.1}px)` }}
+              >
+                Comenzemos tu transformación digital
+              </h3>
+              <p 
+                className="text-lg text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed"
+                style={{ transform: `translateY(${(scrollY - 3000) * 0.05}px)` }}
+              >
+                Agenda una consulta gratuita con nuestros expertos en IA y descubre cómo podemos impulsar tu negocio desde Ourense.
+              </p>
+              <div 
+                className="flex flex-col sm:flex-row gap-6 justify-center"
+                style={{ transform: `translateY(${(scrollY - 3000) * -0.05}px)` }}
+              >
+                <button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-10 py-5 rounded-2xl font-semibold transition-all duration-500 transform hover:scale-110 hover:shadow-2xl shadow-lg shadow-cyan-500/30">
+                  Agendar Consulta Gratuita
+                </button>
+                <button className="border-2 border-cyan-400/50 text-cyan-100 hover:bg-cyan-400/10 backdrop-blur-sm px-10 py-5 rounded-2xl font-semibold transition-all duration-500 transform hover:scale-105">
+                  Descargar Caso de Estudio
+                </button>
+              </div>
             </div>
           </div>
         </div>
