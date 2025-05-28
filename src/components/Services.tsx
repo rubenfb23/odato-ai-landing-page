@@ -1,8 +1,17 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Truck, Factory, BarChart3, Users, Bot, Cog } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const Services = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const services = [
     {
       icon: Truck,
@@ -43,9 +52,24 @@ const Services = () => {
   ];
 
   return (
-    <section id="servicios" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+    <section id="servicios" className="py-20 bg-white relative overflow-hidden">
+      {/* Subtle background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div 
+          className="absolute top-20 right-0 w-64 h-64 bg-primary-100/30 rounded-full blur-3xl"
+          style={{ transform: `translateY(${(scrollY - 800) * 0.3}px)` }}
+        ></div>
+        <div 
+          className="absolute bottom-20 left-0 w-64 h-64 bg-primary-50/50 rounded-full blur-3xl"
+          style={{ transform: `translateY(${(scrollY - 1200) * -0.2}px)` }}
+        ></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div 
+          className="text-center mb-16"
+          style={{ transform: `translateY(${(scrollY - 600) * 0.1}px)` }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Nuestros Servicios de
             <span className="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent"> IA</span>
@@ -60,6 +84,10 @@ const Services = () => {
             <Card 
               key={service.title} 
               className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-lg bg-gradient-to-br from-white to-gray-50"
+              style={{ 
+                transform: `translateY(${(scrollY - 800 - index * 100) * 0.05}px)`,
+                transitionDelay: `${index * 0.1}s`
+              }}
             >
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto w-16 h-16 bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -86,7 +114,10 @@ const Services = () => {
           ))}
         </div>
 
-        <div className="text-center mt-16">
+        <div 
+          className="text-center mt-16"
+          style={{ transform: `translateY(${(scrollY - 1400) * 0.05}px)` }}
+        >
           <p className="text-gray-600 mb-6">¿No encuentras lo que necesitas?</p>
           <button className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
             Consultoría Personalizada
